@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Ordine</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div class = "container text-center">
+  <h1 th:if="${not listaProdotti.isEmpty()}">Prodotti</h1>
+  <h1 th:if="${listaProdotti.isEmpty()}">Al momento non vi sono prodotti</h1>
+</div>
+
+<div>
+  <table class="table table-striped table-bordered" id = "mytab1" th:if="${not listaProdotti.isEmpty()}">
+    <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Descrizione</th>
+      <th>Prezzo</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prodotto: ${listaProdotti}">
+      <td th:text="${prodotto.getNome()}">Nome</td>
+      <td th:text="${prodotto.getDescrizione()}">Descrizione</td>
+      <td th:text="${prodotto.getPrezzo()}">Prezzo</td>
+      <td><form th:action="@{/prodotto/delete/{id}(id = ${prodotto.getId()})}" method="get">
+        <button type ="submit" style="background-color:white">Rimuovi Prodotto</button>
+      </form>
+      </td>
+      <td><form th:action="@{/prodotto/form_modifica/{id}(id = ${prodotto.getId()})}" method="get">
+        <button type ="submit" style="background-color:white">Modifica Prodotto</button>
+      </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <h4><a th:href="@{/prodotto/Dashboard}">Clicca qui per tornare alla dashboard</a></h4>
+</div>
+</div>
+
+</body>
+</html>

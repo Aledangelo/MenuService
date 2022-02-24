@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Modifica Prodotto</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+
+<div class = "container text-center">
+    <div>
+        <h1>Modifica Prodotto</h1>
+    </div>
+    <div>
+        <form  action="#" th:action= "@{/prodotto/update/{id}(id = ${prodotto.getId()})}" method="post"
+               style="max-width: 600px; margin: 0 auto;"
+               th:object="${prodotto}">
+            <div class="m-3">
+
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Nome</label>
+                    <div class="col-8">
+                        <input type = "text" class="form-control" th:field="*{nome}" required
+                               minlength="2" maxlength="50" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Descrizione</label>
+                    <div class="col-8">
+                        <input id ="descrizione" name = "descrizione" type = "text" class="form-control" th:field="*{descrizione}" required />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Prezzo</label>
+                    <div class="col-8">
+                        <input type = "number" class="form-control" th:field="*{prezzo}" required />
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-primary">Modifica</button>
+                </div>
+
+            </div>
+        </form>
+        <h4><a th:href="@{/prodotto/Dashboard}">Clicca qui per tornare alla dashboard</a></h4>
+    </div>
+
+</div>
+
+</body>
+</html>

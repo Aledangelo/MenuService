@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Lista Eventi - GreenPass Reservation</title>
+	<!-- <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" /> -->
+
+    <script>
+        let prodotti = [];
+
+        function addToCart(id) {
+            prodotti.push(id);
+            alert("Prodotto aggiunto correttamente!\nEcco il tuo ordine aggiornato: " + prodotti);
+        }
+    </script>
+
+    <script>
+        function ordina() {
+            document.getElementById("order").value = prodotti;
+        }
+    </script>
+
+</head>
+<body>
+	
+	<div class = "container text-center">
+		<div>
+        <h1>Lista dei Prodotti</h1>
+    </div>
+
+    <div>
+        <div>
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+
+                    <th>Nome</th>
+                    <th>Descrizione</th>
+                    <th>Prezzo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prodotto: ${listaProdotti}">
+                    <td th:text="${prodotto.getId()}" th:id="${prodotto.getId()}" hidden></td>
+                    <td th:text="${prodotto.getNome()}">Nome</td>
+                    <td th:text="${prodotto.getDescrizione()}">Descrizione</td>
+                    <td th:text="${prodotto.getPrezzo()}">Prezzo</td>
+                </tr>
+                </tbody>
+            </table>
+            <br>
+            <br>
+
+
+
+
+            <form th:action="@{/prodotto/ordina}" method="post">
+                <select th:each="prodotto: ${listaProdotti}" name="prodotti" id="prodotti" multiple>
+                    <option th:text="${prodotto.getNome()}" th:value="${prodotto.getId()}">Nome</option>
+                </select>
+                <br>
+                <label>Inserire l'indirizzo nel formato indicato:</label>
+                <input type="text" name="indirizzo" id="indirizzo" placeholder="Via esempio 12">
+                <button type="submit" class="btn btn-primary">Ordina</button>
+            </form>
+
+
+            <h4><a th:href="@{/prodotto/Dashboard}">Clicca qui per tornare alla dashboard</a></h4>
+            <!--
+            <label>Scegli i prodotti:</label>
+            <form th:action="@{/prodotto/ordina}" method="post">
+                <select th:each="prodotto: ${listaProdotti}" name="prodotti" id="prodotti" multiple>
+                    <option th:value="${prodotto.getId()}" th:text="${prodotto.getNome()}">Nome</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Carica Prodotto</button>
+            </form>
+        </div>
+        -->
+      <!-- <h4><a th:href="@{/dashboard_cliente}">Clicca qui per tornare alla dashboard.</a></h4> -->
+    </div>
+</div>
+
+</body>
+</html>

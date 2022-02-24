@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Eventi Gestore - GreenPass Reservation</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+
+<body>
+
+	<div class = "container text-center">
+		<div>
+        <h1>I miei Eventi</h1>
+    </div>
+     
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrizione</th>
+                    <th>Prezzo</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="evento: ${listaProdotti}">
+                    <td th:value="${prodotto.getId()}" hidden></td>
+                    <td th:text="${prodotto.getNome()}">Nome</td>
+                    <td th:text="${prodotto.getDescrizione()}">Descrizione</td>
+                    <td th:text="${prodotto.getPrezzo()}">Prezzo</td>
+                    <td><form th:action="@{/form_modifica_evento}">
+						<input type="hidden" name = "codice_evento" th:value = "" readonly />
+						<input type="submit" value = "Modifica" style="background-color:white"/> 
+					</form></td>
+                    <!--
+					<td><form th:action="@{/elimina_evento}" method="post">
+						<input type="hidden" name = "codice_evento" th:value = "${evento.codice_evento}" readonly /> 
+						<input type="submit" value = "Elimina" onclick="clicked(event)" style="background-color:white"/> 
+					</form></td>
+					<td><form th:action="@{/visualizza_prenotazioni_evento}">
+						<input type="hidden" name = "codice_evento" th:value = "${evento.codice_evento}" readonly /> 
+						<input type="submit" value = "Visualizza prenotazioni" style="background-color:white"/>
+					</form></td>
+					-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+</body>
+</html>

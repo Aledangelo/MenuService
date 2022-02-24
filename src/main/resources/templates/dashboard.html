@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Dashboard</title>
+<style>
+a {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  padding: 12px 40px;
+  margin: 10px 20px;
+  border-radius: 30px;
+  background-image: linear-gradient(45deg, #6ab1d7 0%, #33d9de 50%, #002878 100%);
+  background-position: 100% 0;
+  background-size: 200% 200%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: white;
+  box-shadow: 0 16px 32px 0 rgba(0,40,120,.35);
+  transition: .5s;
+}
+a:hover {
+  box-shadow: 0 0 0 0 rgba(0,40,120,0);
+  background-position: 0 0;
+  color: blue;
+}
+
+</style>
+</head>
+<body>
+	
+	<div class = "container text-center">
+		<div th:if="${r == 2}">
+				<h3> <a th:href="@{/ordini/all}">Visualizza Ordini</a></h3>
+				<h3> <a th:href="@{/prodotto/get}">Visualizza Prodotti</a></h3>
+				<h3> <a th:href="@{/prodotto/form_upload}">Carica Prodotto</a></h3>
+				<form th:action="@{/prodotto/logout}" method="get">
+					<button type="submit" class="btn">LOGOUT</button>
+				</form>
+
+    	</div>
+		<div th:if="${r == 1}">
+			<h3> <a th:href="@{/ordini/waiting/all}">Visualizza Ordini</a></h3>
+			<h3> <a th:href="@{/ordini/rider/myOrder}">I Miei Ordini</a></h3>
+			<form th:action="@{/prodotto/logout}" method="get">
+				<button type="submit" class="btn">LOGOUT</button>
+			</form>
+
+		</div>
+		<div th:if="${r == 0}">
+			<h3> <a th:href="@{/ordini/user/myOrder}">Il Mio Ordine</a></h3>
+			<h3> <a th:href="@{/prodotto/get}">Visualizza Prodotti</a></h3>
+			<form th:action="@{/prodotto/logout}" method="get">
+				<button type="submit" class="btn">LOGOUT</button>
+			</form>
+
+		</div>
+	</div>
+
+</body>
+</html>
