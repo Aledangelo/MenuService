@@ -84,14 +84,18 @@ public class prodottoController {
     @RolesAllowed({"admin_role", "user_role"})
     public String getProdotti(Model model, HttpServletRequest request, Authentication authentication) {
         logging(request);
-        List<Prodotto> listaProdotti = prodottoService.getProdotti();
-        model.addAttribute("prodotto", new Prodotto());
-        model.addAttribute("listaProdotti", listaProdotti);
-        String role = authentication.getAuthorities().stream().findFirst().get().toString();
-        if (role.equals("ROLE_admin_role")) {
-            return  "prodottiTOT";
-        } else {
-            return "Menu";
+        try {
+            List<Prodotto> listaProdotti = prodottoService.getProdotti();
+            model.addAttribute("prodotto", new Prodotto());
+            model.addAttribute("listaProdotti", listaProdotti);
+            String role = authentication.getAuthorities().stream().findFirst().get().toString();
+            if (role.equals("ROLE_admin_role")) {
+                return  "prodottiTOT";
+            } else {
+                return "Menu";
+            }
+        } catch (Exception e) {
+            return "pagina_inaccessibile";
         }
     }
 

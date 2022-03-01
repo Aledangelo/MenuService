@@ -30,14 +30,6 @@ public class prodottoService {
         return prodottoRepository.save(prodotto);
     }
 
-    public void logout(String token) {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", token);
-        HttpEntity req = new HttpEntity(httpHeaders);
-
-        restTemplate.exchange("http://127.0.0.1:1234/auth/realms/progettoSSD/protocol/openid-connect/logout", HttpMethod.GET, req, String.class);
-    }
-
     public String deleteProdottoById(String id) throws Exception{
         if(ObjectId.isValid(id)) {
             Prodotto prodotto = prodottoRepository.findById(id).orElseThrow();
@@ -74,7 +66,7 @@ public class prodottoService {
         httpHeaders.set("Authorization", token);
         HttpEntity<List<Prodotto>> req = new HttpEntity<List<Prodotto>>(prod, httpHeaders);
 
-        restTemplate.exchange("http://127.0.0.1:9001/ordini/createOrder/" + id_utente + "/" + indirizzo, HttpMethod.POST, req, String.class);
+        restTemplate.exchange("http://10.16.11.227:9001/ordini/createOrder/" + id_utente + "/" + indirizzo, HttpMethod.POST, req, String.class);
 
         return prod;
     }
